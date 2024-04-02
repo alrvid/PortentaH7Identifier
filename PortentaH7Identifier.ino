@@ -45,6 +45,23 @@ void setup() {
   {
     Serial.println(" (Unknown)");
   }
+  
+  uint32_t uid[3];
+
+  uid[0] = HAL_GetUIDw0();
+  uid[1] = HAL_GetUIDw1();
+  uid[2] = HAL_GetUIDw2();
+ 
+  Serial.print("Position on wafer : ");
+  Serial.println(uid[0], HEX);
+  Serial.print("Wafer number      : ");
+  Serial.println(uid[1] & 0xff);
+  Serial.print("Lot number        : ");
+  for (int i=5; i<12; i++)
+  {
+    Serial.print(*(((char*) uid)+i));
+  }
+  Serial.println();  
 }
 
 void loop() {
